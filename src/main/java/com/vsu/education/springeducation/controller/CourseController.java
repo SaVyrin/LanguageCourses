@@ -17,7 +17,7 @@ public class CourseController {
         this.courseService = courseService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Course> addCourse(@RequestBody Course course) {
         courseService.addCourse(course);
         return new ResponseEntity<>(course, HttpStatus.OK);

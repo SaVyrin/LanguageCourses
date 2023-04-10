@@ -17,7 +17,7 @@ public class PaymentsController {
         this.paymentsService = paymentsService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Payments> addPayments(@RequestBody Payments payments) {
         paymentsService.addPayments(payments);
         return new ResponseEntity<>(payments, HttpStatus.OK);

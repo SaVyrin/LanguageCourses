@@ -17,7 +17,7 @@ public class StudentsGroupController {
         this.studentsGroupService = studentsGroupService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<StudentsGroup> addStudentsGroup(@RequestBody StudentsGroup studentsGroup) {
         studentsGroupService.addStudentsGroup(studentsGroup);
         return new ResponseEntity<>(studentsGroup, HttpStatus.OK);

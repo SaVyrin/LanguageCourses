@@ -20,7 +20,7 @@ public class CourseApplicationController {
     @PostMapping("/add")
     public ResponseEntity<CourseApplication> addCourse(@RequestBody CourseApplication courseApplication) {
         courseApplicationService.addCourseApplication(courseApplication);
-        return new ResponseEntity<>(courseApplication, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
@@ -28,5 +28,12 @@ public class CourseApplicationController {
     public ResponseEntity<List<CourseApplication>> getCourseApplications() {
         List<CourseApplication> courseApplications = courseApplicationService.getCourseApplications();
         return new ResponseEntity<>(courseApplications, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/end")
+    public ResponseEntity<Object> endApplications() {
+        courseApplicationService.endApplications();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

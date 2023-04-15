@@ -11,6 +11,8 @@ public class Student {
     private final String surname;
     private final String patronymic;
     private final String phoneNumber;
+    Course course = null;
+    int courseTime = 0;
 
     public Student(
             int id,

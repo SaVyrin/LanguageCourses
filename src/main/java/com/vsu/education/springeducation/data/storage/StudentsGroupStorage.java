@@ -1,20 +1,34 @@
 package com.vsu.education.springeducation.data.storage;
 
-import com.vsu.education.springeducation.data.model.StudentsGroup;
+import com.vsu.education.springeducation.data.model.StudentsGroupEntity;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Component
 public class StudentsGroupStorage {
-    private HashMap<Integer, StudentsGroup> studentsGroupHashMap = new HashMap<>();
+    private final JdbcTemplate jdbcTemplate;
 
-    public void addStudentsGroup(StudentsGroup studentsGroup) {
-        studentsGroupHashMap.put(studentsGroup.getId(), studentsGroup);
+    public StudentsGroupStorage(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<StudentsGroup> getAllStudentsGroup() {
-        return studentsGroupHashMap.values().stream().toList();
+    public void addStudentsGroup(StudentsGroupEntity studentsGroupEntity) {
+        jdbcTemplate.update(
+                "INSERT INTO students_group (id, students_ids)" +
+                        " VALUES(?,?)",
+                count() + 1, studentsGroupEntity.getStudents_ids()
+        );
+    }
+
+    public List<StudentsGroupEntity> getAllStudentsGroups() {
+        return jdbcTemplate.query("SELECT * from students_group",
+                BeanPropertyRowMapper.newInstance(StudentsGroupEntity.class));
+    }
+
+    public int count() {
+        return jdbcTemplate.queryForObject("SELECT COUNT(1) FROM students_group", Integer.class);
     }
 }

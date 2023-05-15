@@ -9,8 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseApplication {
+public class CourseEntity {
     private Integer id;
-    private StudentWithCourseEntity studentWithCourseEntity;
-    private CourseEntity courseEntity;
+    private String language;
+    private Integer level;
+    private Integer duration;
+    private Integer intensity;
+    private Integer price;
+
+    public static final int MAX_COURSE_LEVEL = 5;
 }

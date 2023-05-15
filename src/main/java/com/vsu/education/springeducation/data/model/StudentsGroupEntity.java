@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseApplication {
+public class StudentsGroupEntity {
     private Integer id;
-    private StudentWithCourseEntity studentWithCourseEntity;
-    private CourseEntity courseEntity;
+    private String students_ids;
 }

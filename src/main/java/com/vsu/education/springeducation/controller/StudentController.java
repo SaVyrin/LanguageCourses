@@ -1,6 +1,7 @@
 package com.vsu.education.springeducation.controller;
 
-import com.vsu.education.springeducation.data.model.Student;
+import com.vsu.education.springeducation.data.model.StudentEntity;
+import com.vsu.education.springeducation.data.model.StudentWithCourseEntity;
 import com.vsu.education.springeducation.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,14 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        studentService.addStudent(student);
-        return new ResponseEntity<>(student, HttpStatus.OK);
+    public ResponseEntity<StudentWithCourseEntity> addStudent(@RequestBody StudentWithCourseEntity studentWithCourseEntity) {
+        studentService.addStudent(studentWithCourseEntity);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Student>> getStudents() {
-        List<Student> students = studentService.getStudent();
-        return new ResponseEntity<>(students, HttpStatus.OK);
+    public ResponseEntity<List<StudentEntity>> getStudents() {
+        List<StudentEntity> studentEntities = studentService.getStudents();
+        return new ResponseEntity<>(studentEntities, HttpStatus.OK);
     }
 }

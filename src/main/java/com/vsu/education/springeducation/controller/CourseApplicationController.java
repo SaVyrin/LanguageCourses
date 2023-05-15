@@ -1,6 +1,7 @@
 package com.vsu.education.springeducation.controller;
 
 import com.vsu.education.springeducation.data.model.CourseApplication;
+import com.vsu.education.springeducation.data.model.CourseApplicationEntity;
 import com.vsu.education.springeducation.service.CourseApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,16 @@ public class CourseApplicationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<CourseApplication> addCourse(@RequestBody CourseApplication courseApplication) {
-        courseApplicationService.addCourseApplication(courseApplication);
+    public ResponseEntity<CourseApplicationEntity> addCourse(@RequestBody CourseApplication courseApplicationEntity) {
+        courseApplicationService.addCourseApplication(courseApplicationEntity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @GetMapping("/get")
     public ResponseEntity<List<CourseApplication>> getCourseApplications() {
-        List<CourseApplication> courseApplications = courseApplicationService.getCourseApplications();
-        return new ResponseEntity<>(courseApplications, HttpStatus.OK);
+        List<CourseApplication> courseApplicationEntities = courseApplicationService.getCourseApplications();
+        return new ResponseEntity<>(courseApplicationEntities, HttpStatus.OK);
     }
 
 

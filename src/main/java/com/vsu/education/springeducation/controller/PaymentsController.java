@@ -1,6 +1,6 @@
 package com.vsu.education.springeducation.controller;
 
-import com.vsu.education.springeducation.data.model.Payments;
+import com.vsu.education.springeducation.data.model.PaymentsEntity;
 import com.vsu.education.springeducation.service.PaymentsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ public class PaymentsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Payments> addPayments(@RequestBody Payments payments) {
-        paymentsService.addPayments(payments);
-        return new ResponseEntity<>(payments, HttpStatus.OK);
+    public ResponseEntity<PaymentsEntity> addPayments(@RequestBody PaymentsEntity paymentsEntity) {
+        paymentsService.addPayments(paymentsEntity);
+        return new ResponseEntity<>(paymentsEntity, HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Payments>> getPayments() {
-        List<Payments> payments = paymentsService.getPayments();
+    public ResponseEntity<List<PaymentsEntity>> getPayments() {
+        List<PaymentsEntity> payments = paymentsService.getPayments();
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 }

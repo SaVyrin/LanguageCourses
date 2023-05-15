@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseApplication {
+public class CourseApplicationEntity {
     private Integer id;
-    private StudentWithCourseEntity studentWithCourseEntity;
-    private CourseEntity courseEntity;
+    private int student_id;
+    private int course_id;
 }

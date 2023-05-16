@@ -1,9 +1,9 @@
 package com.vsu.education.springeducation.service;
 
-import com.vsu.education.springeducation.data.model.CourseEntity;
-import com.vsu.education.springeducation.data.model.StudentWithCourseEntity;
-import com.vsu.education.springeducation.data.model.StudentsGroup;
-import com.vsu.education.springeducation.data.model.StudentsGroupEntity;
+import com.vsu.education.springeducation.data.entity.CourseEntity;
+import com.vsu.education.springeducation.data.domain.Student;
+import com.vsu.education.springeducation.data.domain.StudentsGroup;
+import com.vsu.education.springeducation.data.entity.StudentsGroupEntity;
 import com.vsu.education.springeducation.data.storage.CourseStorage;
 import com.vsu.education.springeducation.data.storage.StudentStorage;
 import com.vsu.education.springeducation.data.storage.StudentsGroupStorage;
@@ -37,7 +37,7 @@ public class StudentsGroupService {
                                 if (student.getCourseId() != 0) {
                                     course = courseStorage.getCourseById(student.getCourseId());
                                 }
-                                return new StudentWithCourseEntity(
+                                return new Student(
                                         student.getId(),
                                         student.getName(),
                                         student.getSurname(),

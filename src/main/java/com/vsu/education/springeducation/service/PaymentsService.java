@@ -1,6 +1,6 @@
 package com.vsu.education.springeducation.service;
 
-import com.vsu.education.springeducation.data.model.PaymentsEntity;
+import com.vsu.education.springeducation.data.entity.PaymentEntity;
 import com.vsu.education.springeducation.data.storage.PaymentsStorage;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,11 +14,11 @@ public class PaymentsService {
         this.paymentsStorage = paymentsStorage;
     }
 
-    public void addPayments(PaymentsEntity paymentsEntity) {
-        paymentsStorage.addPayments(paymentsEntity);
+    public void addPayments(PaymentEntity paymentEntity) {
+        paymentsStorage.addPayments(paymentEntity);
     }
 
-    public List<PaymentsEntity> getPayments() {
+    public List<PaymentEntity> getPayments() {
         return paymentsStorage.getAllPayments();
     }
 }

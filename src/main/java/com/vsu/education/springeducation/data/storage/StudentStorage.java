@@ -1,8 +1,8 @@
 package com.vsu.education.springeducation.data.storage;
 
-import com.vsu.education.springeducation.data.model.CourseEntity;
-import com.vsu.education.springeducation.data.model.StudentEntity;
-import com.vsu.education.springeducation.data.model.StudentWithCourseEntity;
+import com.vsu.education.springeducation.data.entity.CourseEntity;
+import com.vsu.education.springeducation.data.entity.StudentEntity;
+import com.vsu.education.springeducation.data.domain.Student;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -17,25 +17,25 @@ public class StudentStorage {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addStudent(StudentWithCourseEntity studentWithCourseEntity) {
+    public void addStudent(Student student) {
         jdbcTemplate.update(
                 "INSERT INTO students (id, name, surname, patronymic, phone_number, course_id, course_time)" +
                         " VALUES(?,?,?,?,?,?,?)",
-                count() + 1, studentWithCourseEntity.getName(), studentWithCourseEntity.getSurname(), studentWithCourseEntity.getPatronymic(), studentWithCourseEntity.getPhoneNumber(), studentWithCourseEntity.getCourseEntity().getId(), studentWithCourseEntity.getCourseTime()
+                count() + 1, student.getName(), student.getSurname(), student.getPatronymic(), student.getPhoneNumber(), student.getCourseEntity().getId(), student.getCourseTime()
         );
     }
 
-    public void updateStudentCourse(StudentWithCourseEntity studentWithCourseEntity, CourseEntity courseEntity) {
+    public void updateStudentCourse(Student student, CourseEntity courseEntity) {
         jdbcTemplate.execute(
                 "UPDATE students SET course_id = " + courseEntity.getId()
-                        + " WHERE id = " + studentWithCourseEntity.getId()
+                        + " WHERE id = " + student.getId()
         );
     }
 
-    public void updateStudentCourseTime(StudentWithCourseEntity studentWithCourseEntity) {
+    public void updateStudentCourseTime(Student student) {
         jdbcTemplate.execute(
-                "UPDATE students SET course_time = " + studentWithCourseEntity.getCourseTime()
-                        + " WHERE id = " + studentWithCourseEntity.getId()
+                "UPDATE students SET course_time = " + student.getCourseTime()
+                        + " WHERE id = " + student.getId()
         );
     }
 

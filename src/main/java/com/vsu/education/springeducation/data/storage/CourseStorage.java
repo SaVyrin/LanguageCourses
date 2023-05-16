@@ -1,6 +1,6 @@
 package com.vsu.education.springeducation.data.storage;
 
-import com.vsu.education.springeducation.data.model.CourseEntity;
+import com.vsu.education.springeducation.data.entity.CourseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;

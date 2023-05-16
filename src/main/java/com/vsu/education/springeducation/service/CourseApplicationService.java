@@ -1,8 +1,11 @@
 package com.vsu.education.springeducation.service;
 
 import com.google.common.collect.Lists;
-import com.vsu.education.springeducation.data.model.*;
+import com.vsu.education.springeducation.data.entity.*;
 import com.vsu.education.springeducation.data.storage.*;
+import com.vsu.education.springeducation.data.domain.CourseApplication;
+import com.vsu.education.springeducation.data.domain.Student;
+import com.vsu.education.springeducation.data.domain.StudentsGroup;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,7 +59,7 @@ public class CourseApplicationService {
         var applications = getCourseApplications();
 
         for (CourseApplication application : applications) {
-            var student = application.getStudentWithCourseEntity();
+            var student = application.getStudent();
             var course = application.getCourseEntity();
             student.setCourseEntity(application.getCourseEntity()); // TODO Перенести это в место, где создаётся CourseApplication
             studentStorage.updateStudentCourse(student, course);
@@ -68,7 +71,7 @@ public class CourseApplicationService {
                     if (student.getCourseId() != 0) {
                         course = courseStorage.getCourseById(student.getCourseId());
                     }
-                    return new StudentWithCourseEntity(
+                    return new Student(
                             student.getId(),
                             student.getName(),
                             student.getSurname(),
@@ -90,27 +93,27 @@ public class CourseApplicationService {
                         student.goToNextLevel();
                     }
                 })
-                .collect((Collectors.groupingBy(StudentWithCourseEntity::getCourseEntity)));
+                .collect((Collectors.groupingBy(Student::getCourseEntity)));
 
-        for (Map.Entry<CourseEntity, List<StudentWithCourseEntity>> entry : groupedStudents.entrySet()) {
+        for (Map.Entry<CourseEntity, List<Student>> entry : groupedStudents.entrySet()) {
             if (entry.getKey() == null) continue;
 
             var courseStudents = entry.getValue();
 
-            for (List<StudentWithCourseEntity> groupStudentEntities : Lists.partition(courseStudents, 7)) {
+            for (List<Student> groupStudentEntities : Lists.partition(courseStudents, 7)) {
                 var studentsGroup = new StudentsGroup(1, groupStudentEntities);
                 studentsGroupStorage.addStudentsGroup(new StudentsGroupEntity(1, studentsGroup.getStudentsIds()));
             }
         }
 
-        for (StudentWithCourseEntity studentWithCourseEntity : studentsWithCourse) {
-            if (studentWithCourseEntity.getCourseEntity() != null) {
-                var currentCourseTime = studentWithCourseEntity.getCourseTime();
-                studentWithCourseEntity.setCourseTime(currentCourseTime + 2);
+        for (Student student : studentsWithCourse) {
+            if (student.getCourseEntity() != null) {
+                var currentCourseTime = student.getCourseTime();
+                student.setCourseTime(currentCourseTime + 2);
                 paymentsStorage.addPayments(
-                        new PaymentsEntity(1, studentWithCourseEntity.getId(), studentWithCourseEntity.getCourseEntity().getId(), studentWithCourseEntity.getCourseEntity().getPrice())
+                        new PaymentEntity(1, student.getId(), student.getCourseEntity().getId(), student.getCourseEntity().getPrice())
                 );
-                studentStorage.updateStudentCourseTime(studentWithCourseEntity);
+                studentStorage.updateStudentCourseTime(student);
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.vsu.education.springeducation.controller;
 
-import com.vsu.education.springeducation.data.model.CourseEntity;
+import com.vsu.education.springeducation.data.entity.CourseEntity;
 import com.vsu.education.springeducation.service.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

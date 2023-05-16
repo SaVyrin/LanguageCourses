@@ -1,5 +1,6 @@
-package com.vsu.education.springeducation.data.model;
+package com.vsu.education.springeducation.data.domain;
 
+import com.vsu.education.springeducation.data.entity.CourseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentWithCourseEntity {
+public class Student {
     private Integer id;
     private String name;
     private String surname;

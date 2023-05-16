@@ -1,6 +1,6 @@
 package com.vsu.education.springeducation.service;
 
-import com.vsu.education.springeducation.data.model.CourseEntity;
+import com.vsu.education.springeducation.data.entity.CourseEntity;
 import com.vsu.education.springeducation.data.storage.CourseStorage;
 import org.springframework.stereotype.Service;
 import java.util.List;

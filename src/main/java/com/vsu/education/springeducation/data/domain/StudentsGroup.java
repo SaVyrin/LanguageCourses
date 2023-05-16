@@ -1,4 +1,4 @@
-package com.vsu.education.springeducation.data.model;
+package com.vsu.education.springeducation.data.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentsGroup {
     private Integer id;
-    private List<StudentWithCourseEntity> studentEntities;
+    private List<Student> studentEntities;
 
     public String getStudentsIds() {
         List<String> studentsIds = studentEntities.stream().map(student -> student.getId().toString()).toList();

@@ -1,7 +1,7 @@
 package com.vsu.education.springeducation.controller;
 
-import com.vsu.education.springeducation.data.model.StudentsGroup;
-import com.vsu.education.springeducation.data.model.StudentsGroupEntity;
+import com.vsu.education.springeducation.data.domain.StudentsGroup;
+import com.vsu.education.springeducation.data.entity.StudentsGroupEntity;
 import com.vsu.education.springeducation.service.StudentsGroupService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.vsu.education.springeducation.data.model;
+package com.vsu.education.springeducation.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

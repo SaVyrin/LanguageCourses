@@ -1,4 +1,4 @@
-package com.vsu.education.springeducation.data.model;
+package com.vsu.education.springeducation.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentsEntity {
+public class PaymentEntity {
     private Integer id;
     private int student_id;
     private int course_id;

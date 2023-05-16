@@ -1,7 +1,7 @@
 package com.vsu.education.springeducation.service;
 
-import com.vsu.education.springeducation.data.model.StudentEntity;
-import com.vsu.education.springeducation.data.model.StudentWithCourseEntity;
+import com.vsu.education.springeducation.data.entity.StudentEntity;
+import com.vsu.education.springeducation.data.domain.Student;
 import com.vsu.education.springeducation.data.storage.CourseStorage;
 import com.vsu.education.springeducation.data.storage.StudentStorage;
 import org.springframework.stereotype.Service;
@@ -18,14 +18,14 @@ public class StudentService {
         this.courseStorage = courseStorage;
     }
 
-    public void addStudent(StudentWithCourseEntity studentWithCourseEntity) {
-        studentStorage.addStudent(studentWithCourseEntity);
+    public void addStudent(Student student) {
+        studentStorage.addStudent(student);
     }
 
-    public StudentWithCourseEntity getStudentWithCourseById(int studentId, int courseId) {
+    public Student getStudentWithCourseById(int studentId, int courseId) {
         var student = studentStorage.getStudentById(studentId);
         var course = courseStorage.getCourseById(courseId);
-        return new StudentWithCourseEntity(
+        return new Student(
                 student.getId(),
                 student.getName(),
                 student.getSurname(),

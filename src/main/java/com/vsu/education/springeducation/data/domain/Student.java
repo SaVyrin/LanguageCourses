@@ -32,10 +32,11 @@ public class Student {
     }
 
     public void goToNextLevel() {
+        courseTime = 0;
         courseEntity = new CourseEntity(
-                courseEntity.getId() + 1,
+                courseEntity.getId(),
                 courseEntity.getLanguage(),
-                courseEntity.getLevel() + 1,
+                courseEntity.getLevel(),
                 courseEntity.getDuration(),
                 courseEntity.getIntensity(),
                 courseEntity.getPrice()

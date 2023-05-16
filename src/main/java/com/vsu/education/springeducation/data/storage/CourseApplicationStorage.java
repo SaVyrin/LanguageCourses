@@ -1,6 +1,7 @@
 package com.vsu.education.springeducation.data.storage;
 
 import com.vsu.education.springeducation.data.domain.CourseApplication;
+import com.vsu.education.springeducation.data.dto.request.CourseApplicationRequest;
 import com.vsu.education.springeducation.data.entity.CourseApplicationEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,11 +17,11 @@ public class CourseApplicationStorage {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addCourseApplication(CourseApplication courseApplicationEntity) {
+    public void addCourseApplication(CourseApplicationRequest courseApplicationEntity) {
         jdbcTemplate.update(
                 "INSERT INTO course_application (id, student_id, course_id)" +
                         " VALUES(?,?,?)",
-                count() + 1, courseApplicationEntity.getStudent().getId(), courseApplicationEntity.getCourseEntity().getId()
+                count() + 1, courseApplicationEntity.getStudentId(), courseApplicationEntity.getCourseId()
         );
     }
 

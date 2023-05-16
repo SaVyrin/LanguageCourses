@@ -1,5 +1,6 @@
 package com.vsu.education.springeducation.service;
 
+import com.vsu.education.springeducation.data.dto.request.CourseRequest;
 import com.vsu.education.springeducation.data.entity.CourseEntity;
 import com.vsu.education.springeducation.data.storage.CourseStorage;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class CourseService {
         this.courseStorage = courseStorage;
     }
 
-    public void addCourse(CourseEntity courseEntity) {
+    public void addCourse(CourseRequest courseEntity) {
         courseStorage.addCourse(courseEntity);
     }
 

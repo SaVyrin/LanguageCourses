@@ -1,6 +1,7 @@
 package com.vsu.education.springeducation.service;
 
 import com.google.common.collect.Lists;
+import com.vsu.education.springeducation.data.dto.request.CourseApplicationRequest;
 import com.vsu.education.springeducation.data.entity.*;
 import com.vsu.education.springeducation.data.storage.*;
 import com.vsu.education.springeducation.data.domain.CourseApplication;
@@ -38,8 +39,9 @@ public class CourseApplicationService {
         this.studentService = studentService;
     }
 
-    public void addCourseApplication(CourseApplication courseApplicationEntity) {
+    public void addCourseApplication(CourseApplicationRequest courseApplicationEntity) {
         courseApplicationStorage.addCourseApplication(courseApplicationEntity);
+        studentStorage.updateStudentCourse(courseApplicationEntity.getStudentId(), courseApplicationEntity.getCourseId());
     }
 
     public List<CourseApplication> getCourseApplications() {
@@ -56,15 +58,6 @@ public class CourseApplicationService {
     }
 
     public void endApplications() {
-        var applications = getCourseApplications();
-
-        for (CourseApplication application : applications) {
-            var student = application.getStudent();
-            var course = application.getCourseEntity();
-            student.setCourseEntity(application.getCourseEntity()); // TODO Перенести это в место, где создаётся CourseApplication
-            studentStorage.updateStudentCourse(student, course);
-        }
-
         var students = studentStorage.getAllStudents();
         var studentsWithCourse = students.stream().map(student -> {
                     CourseEntity course = null;
@@ -93,10 +86,10 @@ public class CourseApplicationService {
                         student.goToNextLevel();
                     }
                 })
-                .collect((Collectors.groupingBy(Student::getCourseEntity)));
+                .collect((Collectors.groupingBy(student -> student.getCourseEntity().getId())));
 
-        for (Map.Entry<CourseEntity, List<Student>> entry : groupedStudents.entrySet()) {
-            if (entry.getKey() == null) continue;
+        for (Map.Entry<Integer, List<Student>> entry : groupedStudents.entrySet()) {
+            if (entry.getKey() == null || entry.getKey() == 0) continue;
 
             var courseStudents = entry.getValue();
 

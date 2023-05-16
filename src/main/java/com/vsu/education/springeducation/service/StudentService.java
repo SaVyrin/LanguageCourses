@@ -18,7 +18,7 @@ public class StudentService {
         this.courseStorage = courseStorage;
     }
 
-    public void addStudent(Student student) {
+    public void addStudent(StudentEntity student) {
         studentStorage.addStudent(student);
     }
 

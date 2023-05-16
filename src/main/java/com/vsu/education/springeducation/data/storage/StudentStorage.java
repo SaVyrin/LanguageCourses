@@ -17,18 +17,18 @@ public class StudentStorage {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addStudent(Student student) {
+    public void addStudent(StudentEntity student) {
         jdbcTemplate.update(
                 "INSERT INTO students (id, name, surname, patronymic, phone_number, course_id, course_time)" +
                         " VALUES(?,?,?,?,?,?,?)",
-                count() + 1, student.getName(), student.getSurname(), student.getPatronymic(), student.getPhoneNumber(), student.getCourseEntity().getId(), student.getCourseTime()
+                count() + 1, student.getName(), student.getSurname(), student.getPatronymic(), student.getPhoneNumber(), student.getCourseId(), student.getCourseTime()
         );
     }
 
-    public void updateStudentCourse(Student student, CourseEntity courseEntity) {
+    public void updateStudentCourse(Integer studentId, Integer courseId) {
         jdbcTemplate.execute(
-                "UPDATE students SET course_id = " + courseEntity.getId()
-                        + " WHERE id = " + student.getId()
+                "UPDATE students SET course_id = " + courseId
+                        + " WHERE id = " + studentId
         );
     }
 

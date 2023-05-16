@@ -1,5 +1,7 @@
 package com.vsu.education.springeducation.controller;
 
+import com.vsu.education.springeducation.data.dto.request.PaymentRequest;
+import com.vsu.education.springeducation.data.dto.response.PaymentResponse;
 import com.vsu.education.springeducation.data.entity.PaymentEntity;
 import com.vsu.education.springeducation.service.PaymentsService;
 import org.springframework.http.HttpStatus;
@@ -18,14 +20,19 @@ public class PaymentsController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<PaymentEntity> addPayments(@RequestBody PaymentEntity paymentEntity) {
-        paymentsService.addPayments(paymentEntity);
-        return new ResponseEntity<>(paymentEntity, HttpStatus.OK);
+    public ResponseEntity<Object> addPayments(@RequestBody PaymentRequest request) {
+        paymentsService.addPayments(new PaymentEntity(0, request.getStudent_id(), request.getCourse_id(), request.getValue()));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<PaymentEntity>> getPayments() {
-        List<PaymentEntity> payments = paymentsService.getPayments();
+    public ResponseEntity<List<PaymentResponse>> getPayments() {
+        List<PaymentResponse> payments = paymentsService.getPayments().stream().map(payment -> new PaymentResponse(
+                payment.getId(),
+                payment.getStudent_id(),
+                payment.getCourse_id(),
+                payment.getValue()
+        )).toList();
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 }

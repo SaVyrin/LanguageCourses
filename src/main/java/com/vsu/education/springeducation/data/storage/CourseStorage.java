@@ -1,5 +1,6 @@
 package com.vsu.education.springeducation.data.storage;
 
+import com.vsu.education.springeducation.data.dto.request.CourseRequest;
 import com.vsu.education.springeducation.data.entity.CourseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +16,7 @@ public class CourseStorage {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addCourse(CourseEntity courseEntity) {
+    public void addCourse(CourseRequest courseEntity) {
         jdbcTemplate.update(
                 "INSERT INTO course (id, language, level, duration, intensity, price)" +
                         " VALUES(?,?,?,?,?,?)",

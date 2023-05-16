@@ -1,5 +1,7 @@
 package com.vsu.education.springeducation.controller;
 
+import com.vsu.education.springeducation.data.dto.request.StudentRequest;
+import com.vsu.education.springeducation.data.dto.response.StudentResponse;
 import com.vsu.education.springeducation.data.entity.StudentEntity;
 import com.vsu.education.springeducation.data.domain.Student;
 import com.vsu.education.springeducation.service.StudentService;
@@ -19,14 +21,28 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        studentService.addStudent(student);
+    public ResponseEntity<Object> addStudent(@RequestBody StudentRequest request) {
+        studentService.addStudent(new StudentEntity(
+                0,
+                request.getName(),
+                request.getSurname(),
+                request.getPatronymic(),
+                request.getPhoneNumber(),
+                0,
+                0
+        ));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<StudentEntity>> getStudents() {
-        List<StudentEntity> studentEntities = studentService.getStudents();
-        return new ResponseEntity<>(studentEntities, HttpStatus.OK);
+    public ResponseEntity<List<StudentResponse>> getStudents() {
+        List<StudentResponse> students = studentService.getStudents().stream().map(student -> new StudentResponse(
+                student.getId(),
+                student.getName(),
+                student.getSurname(),
+                student.getPatronymic(),
+                student.getPhoneNumber()
+        )).toList();
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 }
